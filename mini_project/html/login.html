@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form id="MainForm">
+            <div class="inputBox">
+                <label>Email address</label>
+                <input type="email" id="emailInp" class="input">
+            </div>
+            <div class="inputBox">
+                <label>Password</label>
+                <input type="password" id="passwordInp" class="input">
+            </div>
+        <a href="forgot.html">Forgot password?</a>
+        <button type="submit" >Login</button>
+        
+    </form> 
+    <button type="submit" id="back" style="width:25%">Register</button>
+    <button type="submit" id="googleLogin" style="width:25%">Login with Google</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPre7h_3YsmPASFCBJR6iWL3BW6a3QyRk",
+            authDomain: "travelbook-ab024.firebaseapp.com",
+            databaseURL: "https://travelbook-ab024-default-rtdb.firebaseio.com",
+            projectId: "travelbook-ab024",
+            storageBucket: "travelbook-ab024.firebasestorage.app",
+            messagingSenderId: "698849855582",
+            appId: "1:698849855582:web:ecff42b718f80361b50ccf"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+        const auth = getAuth(app);
+        const dbref = ref(db);
+        const provider = new GoogleAuthProvider();
+
+        let EmailInp = document.getElementById('emailInp');
+        let PasswordInp = document.getElementById('passwordInp');
+        let MainForm = document.getElementById('MainForm');
+        let GoogleLogin = document.getElementById('googleLogin');
+        let goBack = document.getElementById('back')
+
+
+        let SignInUser = event => {
+
+            signInWithEmailAndPassword(auth, EmailInp.value.trim(), PasswordInp.value.trim())
+            .then((credentials) => {
+            window.location.href = "main.html";
+                alert("Đăng nhập thành công")
+            })
+            .catch((error) => {
+                alert(error.message);
+                console.log(error.code);
+                console.log(error.message);
+            })
+
+        }
+
+        let googleLogin = () => {
+            signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const user = result.user;
+                window.location.href="main.html";
+                alert("Đăng nhập thành công");
+                })
+            .catch((error) => {
+                console.log(error.code);
+                console.log(error.message);
+                })
+        }
+        let back = () => {
+            window.location.href="register.html"
+        }
+
+        GoogleLogin.addEventListener("click", googleLogin);
+        MainForm.addEventListener("submit", SignInUser);
+        goBack.addEventListener("click", back);
+
+      </script>
+</body>
+</html>

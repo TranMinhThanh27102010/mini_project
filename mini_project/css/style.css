@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color:#49beb7;
+    justify-content: space-between;
+}
+
+#MainForm{
+    padding: 20px;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    width:420px;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+button{
+    background-color: black;
+    margin: 5px 0px 20px 0px;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+    transition: 300ms;
+    text-align: center;
+    text-decoration: none;
+}
+
+button:hover{
+    text-decoration: none;
+    transition: 300ms;
+    background-color: white;
+    color: black;
+}
+
+a{
+    color: white;
+    height:100%;
+    width:200px;
+    transition: 300ms;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 60px;
+}
+
+a:hover{
+    width:400px;
+    transition: 300ms;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.input{
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    outline: none;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    width: 90%;
+}
+
+.input::placeholder {
+    color: #fff;
+    opacity: 0.8;
+}
+
+label{
+    color: white;
+    font-size: 18px;
+}
+
+.inputBox{
+    width: 80%;
+}

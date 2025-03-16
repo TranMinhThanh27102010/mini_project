@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Lý Đơn Hàng</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <img src="logo.png" alt="MindX Coffee">
+            <nav>
+                <a href="#">Trang chủ</a>
+                <a href="#">Menu</a>
+                <a href="#">Giỏ hàng</a>
+            </nav>
+        </div>
+    </header>
+
+    <h1>Danh sách đơn hàng</h1>
+
+    <div class="order-list">
+        <div class="order-item" onclick="redirectToOrderForm('Cà phê cốt dừa', 40000, '/img/thanh-pham-314.jpg')">
+            <img src="/img/thanh-pham-314.jpg" alt="Cà phê cốt dừa">
+            <div class="order-info">
+                <p><strong>Cà phê cốt dừa</strong></p>
+                <p>Tổng tiền: 40.000đ</p>
+                <p>Ngày đặt: 08/10/2024</p>
+            </div>
+        </div>
+
+        <div class="order-item" onclick="redirectToOrderForm('Trà đào cam sả', 90000, '/img/images.jpg')">
+            <img src="/img/images.jpg" alt="Trà đào cam sả">
+            <div class="order-info">
+                <p><strong>Trà đào cam sả</strong></p>
+                <p>Tổng tiền: 90.000đ</p>
+                <p>Ngày đặt: 31/10/2024</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/order-page.js"></script>
+
+</body>
+</html>

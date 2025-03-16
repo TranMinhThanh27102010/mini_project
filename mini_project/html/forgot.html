@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thay đổi mật khẩu</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form id="MainForm">
+        <div class="inputBox">
+            <label>Email address</label>
+            <input type="email" id="emailInp" class="input">
+        </div>
+        <a href="#" id="forgot">Gửi mã</a>
+        
+        
+    </form> 
+    <button type="submit" id="back" style="width:25%">Back</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPre7h_3YsmPASFCBJR6iWL3BW6a3QyRk",
+            authDomain: "travelbook-ab024.firebaseapp.com",
+            databaseURL: "https://travelbook-ab024-default-rtdb.firebaseio.com",
+            projectId: "travelbook-ab024",
+            storageBucket: "travelbook-ab024.firebasestorage.app",
+            messagingSenderId: "698849855582",
+            appId: "1:698849855582:web:ecff42b718f80361b50ccf"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+        const auth = getAuth(app);
+        const dbref = ref(db);
+        const provider = new GoogleAuthProvider();
+
+        let EmailInp = document.getElementById('emailInp');
+        let MainForm = document.getElementById('MainForm');
+        let Forgot = document.getElementById('forgot');
+        let goBack = document.getElementById('back');
+
+        let ForgotPassword = () => {
+
+            sendPasswordResetEmail(auth, EmailInp.value)
+            .then (() => {
+                alert("Đã gửi email để reset mật khẩu");
+            })
+            .catch((error) => {
+                console.log(error.code);
+                console.log(error.message);
+                })
+        }
+        let back = () => {
+            window.location.href="login.html"
+        }  
+
+        Forgot.addEventListener("click",ForgotPassword);
+        goBack.addEventListener("click", back);
+        
+      </script>
+</body>
+</html>

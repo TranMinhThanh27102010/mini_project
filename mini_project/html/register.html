@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form id="MainForm">
+        <div class="inputBox">
+            <label>Email address</label>
+            <input type="email" id="emailInp" class="input">
+        </div>
+        <div class="inputBox">
+            <label>Password</label>
+            <input type="password" id="passwordInp" class="input">
+        </div class="inputBox">
+        <div class="inputBox">
+            <label>First name</label>
+            <input type="text" id="fnameInp" class="input">
+        </div>
+        <div class="inputBox">
+            <label>Last name</label>
+            <input type="text" id="lnameInp" class="input">
+        </div>
+        <button type="submit">Create New User</button>
+    </form>
+    <button type="submit" id="back" style="width:25%">Back</button>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPre7h_3YsmPASFCBJR6iWL3BW6a3QyRk",
+            authDomain: "travelbook-ab024.firebaseapp.com",
+            projectId: "travelbook-ab024",
+            storageBucket: "travelbook-ab024.firebasestorage.app",
+            messagingSenderId: "698849855582",
+            appId: "1:698849855582:web:ecff42b718f80361b50ccf"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+        const auth = getAuth(app);
+
+        let EmailInp = document.getElementById('emailInp');
+        let PasswordInp = document.getElementById('passwordInp');
+        let FnameInp = document.getElementById('fnameInp');
+        let LnameInp = document.getElementById('lnameInp');
+        let MainForm = document.getElementById('MainForm');
+        let goBack = document.getElementById('back')
+
+        let RegisterUser = event => {
+            event.preventDefault();
+
+            createUserWithEmailAndPassword(auth, EmailInp.value.trim(), PasswordInp.value.trim())
+            .then((credentials) => {
+                set(ref(db, 'UsersAuthList/' + credentials.user.uid),{
+                    firstname: FnameInp.value.trim(),
+                    lastname: LnameInp.value.trim()
+                })
+            })
+            .catch((error) => {
+                alert(error.message);
+                console.log(error.code);
+                console.log(error.message);
+            })
+        }
+        let back = () => {
+            window.location.href="login.html"
+        }  
+
+        goBack.addEventListener("click", back);
+        MainForm.addEventListener("submit", RegisterUser);
+      </script>
+</body>
+</html>
